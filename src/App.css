@@ -4,6 +4,7 @@
 
 body{
   background-color: #f5f6fa;
+  background-image: url('./Hollie-Russon-Gilman-civic-engagement-social-distancing-592x333.jpg');
   
 }
 
@@ -18,7 +19,7 @@ background-color: white;
 }
 
 .app__header >h1{
-  color: red;
+  color:white;
   font-size: 2rem;
 }
 
@@ -40,24 +41,27 @@ background-color: white;
 
 .app__right{
   display: flex;
+  height: 780px;
+  flex-direction: column;
+}
+
+.app__right .muiCardContent-root{
+  display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.app__right .MuiCardContent-root{
-display: flex;
-flex-direction: column;
-flex-grow: 1;
-}
-
 .app__graph{
+  display: flex;
+  height: 161px;
+  margin-top: 9px;
   flex-grow: 1;
 }
 
 .app__graphTitle{
-  margin-top: 10px;
-  margin-bottom: 20px;
+margin-top: 16px;
 }
+
 
 @media(max-width:990px){
   .app{

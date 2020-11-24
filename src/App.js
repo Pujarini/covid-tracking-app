@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from "react";
+  
+import React, { useState, useEffect } from "react";
 import {
   MenuItem,
   FormControl,
@@ -54,7 +55,6 @@ function App() {
     getCountries();
   },[]);
 
-  console.log(caseType);
 
   const onCountryChange = async(event) =>{
     const countryCode=event.target.value;
@@ -63,7 +63,9 @@ function App() {
     await fetch(url)
     .then(response=>response.json())
     .then(data =>{
-      console.log(data.countryInfo.lat,data.countryInfo.long);
+      const location=[data.countryInfo.lat,data.countryInfo.long];
+      console.log("changed",location);
+      console.log(countryCode);
       setInputCountry(countryCode);
       setCountryInfo(data);
       setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
@@ -109,12 +111,13 @@ function App() {
           onClick={(e)=>setCaseType("deaths")} title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={numeral(countryInfo.deaths).format("0.0a")}/>
       </div>
       <Map 
-      caseType={caseType}
+      selectedCountry={country}
       countries={mapCountries}
+      caseType={caseType}
       center={mapCenter}
       zoom={mapZoom}/>
       </div>
-      <Card className="app_right">
+      <Card className="app__right">
         <CardContent>
         <h3>
           Live cases by Country

@@ -1,18 +1,22 @@
 import React from 'react';
 import numeral from 'numeral';
 import{Circle,Popup} from "react-leaflet";
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const casesTypeColors = {
     cases: {
       hex: "#CC1034",
+      selected:"#2b0000",
       multiplier: 500,
     },
     recovered: {
       hex: "#7dd71d",
+      selected:"#2b0000",
       multiplier: 700,
     },
     deaths: {
       hex: "#fb4443",
+      selected:"#2b0000",
       multiplier: 1000,
     },
   };
@@ -24,14 +28,19 @@ export  const sortData=(data)=>{
 }
 
 export const prettyPrintStat =(stat)=>(
-    stat ? `+${numeral(stat).format("0.0a")}`: "+0"
+    stat ?<div style={{display:"flex" , alignItems:"center", flexWrap:"wrap"}}><ArrowUpwardIcon/><p>{numeral(stat).format("0.0a")}</p></div> : <div style={{display:"flex" , alignItems:"center", flexWrap:"wrap"}}><ArrowUpwardIcon/><p>0</p></div>
+    
 )
 
-export const showDataOnMap = (data, caseType = "cases") =>
+export const showDataOnMap = (data, caseType,selectedCountry) =>
   data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
-      color={casesTypeColors[caseType].hex}
+      color={
+        country.countryInfo.iso2 === selectedCountry
+        ? casesTypeColors[caseType].selected
+        :casesTypeColors[caseType].hex
+      }
       fillColor={casesTypeColors[caseType].hex}
       fillOpacity={0.4}
       radius={
